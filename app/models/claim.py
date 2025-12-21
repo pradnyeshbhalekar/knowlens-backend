@@ -1,0 +1,14 @@
+from sqlalchemy import Column,ForeignKey,Integer,DateTime,Text,Boolean
+from sqlalchemy.sql import func
+from app.core.db import Base
+
+class Claim(Base):
+    __tablename__ = 'claims'
+
+    id = Column(Integer,primary_key=True,index=True)
+    article_id = Column(Integer,ForeignKey('articles.id',ondelete='CASCADE'))
+
+    text = Column(Text,nullable=False)
+    normalized_text = Column(Text,index=True)
+    is_verified = Column(Boolean,default=False)
+    created_at = Column(DateTime(timezone=True),server_default=func.now())
