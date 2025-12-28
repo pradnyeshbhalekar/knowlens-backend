@@ -1,6 +1,6 @@
 from sqlalchemy import Column,ForeignKey,Integer,DateTime,Text,Boolean
 from sqlalchemy.sql import func
-from app.core.db import Base
+from app.core.database import Base
 
 class Claim(Base):
     __tablename__ = 'claims'
