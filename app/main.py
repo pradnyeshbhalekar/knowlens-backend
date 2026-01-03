@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from app.api.v1.topics import router as topic_routers
+from app.api.v1.search import router as search_routers
 
 
 from app.core.database import engine, Base
@@ -16,9 +17,12 @@ from app.models import (
 
 Base.metadata.create_all(bind=engine)
 
-# --- FastAPI app ---
+
 app = FastAPI(title="Knowlens")
+
+# v1
 app.include_router(topic_routers,prefix='/api/v1')
+app.include_router(search_routers,prefix='/api/v1')
 
 @app.get("/")
 def read_root():

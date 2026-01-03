@@ -6,6 +6,7 @@ class Settings(BaseSettings):
     DB_NAME : str 
     DB_USER : str 
     DB_PASSWORD : int 
+    GITHUB_MODEL_KEY : str
 
     class Config:
         env_file = ".env"
