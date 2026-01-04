@@ -5,6 +5,7 @@ from app.services.pipeline_service import search_and_extract
 from app.models.source import Source
 from app.models.topic import Topic
 from app.models.article import Article
+from app.services.claims_ingestion import ingest_claims_for_article
 
 def slugify(text: str) -> str:
     return (
@@ -92,6 +93,8 @@ def ingest_topic_if_new(db:Session,topic_title:str,limit:int = 5) -> dict:
         db.add(article)
         db.commit()
         db.refresh(article)
+
+        ingest_claims_for_article(db,article.id)
 
         stored_articles+=1
         

@@ -25,10 +25,13 @@ def unified_search(db:Session,topic_input:str,limit:int = 5 ) -> dict :
             }
     
     retrieval_result = get_articles_by_topic(db,topic_input)
+    topic = db.query(Topic).filter(Topic.slug == slug).first()
+
 
 
     return{
         "topic":retrieval_result['topic'],
+        "topic_id":topic.id,
         "slug":retrieval_result['slug'],
         "count":retrieval_result.get('count',0),
         "articles":retrieval_result.get("articles",[])
